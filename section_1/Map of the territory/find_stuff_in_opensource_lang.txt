@@ -1,0 +1,3 @@
+The C lexer in GCC is mostly in https://github.com/gcc-mirror/gcc/blob/master/gcc/c-family/c-lex.cc, the general lexer for all of the C-style languages. Some lexing is also done in https://github.com/gcc-mirror/gcc/blob/master/gcc/c/c-parser.cc where it intermediates between the general lexer and any C specific stuff that's needed. That file is also where the C parser is written, of course.
+
+Both are handwritten as per the GCC wiki.

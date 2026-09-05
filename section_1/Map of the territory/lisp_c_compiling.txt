@@ -1,0 +1,1 @@
+Presumably they have the interpreter along with the C transpiler so that you can easily run your code to check for errors but can still take advantage of C compiler optimisations when deploying it.

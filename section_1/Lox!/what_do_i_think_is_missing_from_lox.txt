@@ -1,0 +1,9 @@
+Arrays, arrays are definitely something that would be nice to have
+
+Some way to check if a float is an integer?? Would be great. Integer division (//) and modulo (%) would be nice too.
+
+Type conversion, being able to convert a float to a string etc would be nice.
+
+Any sort of I/O - keyboard, mouse, files.
+
+Exponentiation!!! Would be really nice! Annoying to implement by hand for non-integers.

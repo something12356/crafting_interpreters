@@ -1,0 +1,8 @@
+JIT makes optimisations harder to implement since the compiler hasn't even seen the full code before it's run. Optimisations get implemented progressively over time, so at the start the program will be slower than precompiled code. This is less of an issue if the code will be running for a long time.
+However JIT is typically used for dynamically typed languages where you can't precompile them anyway, so this isn't a big deal.
+
+Need to recompile a program every time you want to run it, can't compile to object code once and then run that. Stuff is cached so this isn't a big issue, but it does still slow down running the program a tiny bit.
+
+Won't really work for code running on very low level machines, how are you going to do JIT when trying to run code on microprocessors being used for very specific applications that may not even have an operating system?
+
+Might be more secure to just run in a VM (e.g. normally interpreted python) rather than trying to convert to machine code? Not sure. 

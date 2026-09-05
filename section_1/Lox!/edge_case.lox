@@ -1,0 +1,153 @@
+// trying to find weird edge cases in the lox language
+
+// Test 1, does recursion work?
+fun fib(n){
+  if (n==0){return 0;}
+  if (n==1){return 1;}
+  return fib(n-1)+fib(n-2);
+}
+// Yeah it does
+
+// Test 2, can we get overflow with numbers?
+print 100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000*100000;
+// Yep, but just sets it to "inf" when it gets too big so that's fine.
+
+// Test 3, division by zero, not mentioned in the spec
+print 5/0;
+// just prints inf lol
+
+// What do weird expressions evaluate to truth-wise? What is the truth value of "5" or "var x = 3"?
+if (5){
+  print "hi";
+}
+if (-5){
+  print "hi";
+}
+if (0){
+  print "hi";
+}
+// Zero evaluates to true, omg ugh.
+
+// if (var x = 3){
+// print "hi";
+// }
+// Doesn't evaluate to anything, gives error. Interesting. C would treat this as true.
+
+if ("hi"){
+  print "hello";
+}
+// strings always evaluate to true
+
+// Do functions make copies of variables? (like in C/C++) 
+// or reference them? (like pass by reference in C++, or by default for lists in python)
+fun copy_reference_test(z){
+  z = z-1;
+}
+
+var x = 5;
+copy_reference_test(x);
+print x;
+// It copies them, doesn't appear to be a way to pass by reference
+
+// How do functions handle global variables?
+fun global(y){
+  x = x-1;
+}
+global(1);
+print x;
+// No issue, changes them as expected
+
+// What if I use a function before it's defined?
+//test();
+
+//fun test(){
+//  return;
+//}
+// Causes an issue! Works like C, not python.
+
+// How do functions handle variables that aren't global but are still "in scope"?
+fun scope_test1(){
+  var a = 1;
+  fun scope_test2(){
+    a = a-1;
+  }
+  scope_test2();
+  print a;
+}
+
+scope_test1();
+// Again, works
+
+// Okay now for the proper test, I defined x globally earlier
+// What if I define x again as a local variable inside a function
+// And *then* call global?
+print x;
+fun scope_fuckery(){
+  var x = 12;
+  global(1);
+  print x;
+}
+scope_fuckery();
+print x;
+// Changes the global x and not the x inside the function!
+
+// Can I do the same thing for functions? What if I define a function globally
+// Define function with same name inside a function
+// Then call a function referencing that function
+fun func_that_will_be_local_too(hi){
+  return hi+4;
+}
+
+fun global_func_test(hi){
+  return func_that_will_be_local_too(hi);
+}
+
+fun other_func(hi){
+  fun func_that_will_be_local_too(hi){ // This never gets called
+    return hi-9;
+  }
+  return global_func_test(hi);
+}
+
+print other_func(7);
+
+// Are classes copied like other variables, or are they passed by reference (like python)?
+class how_are_classes_handled {
+  init (ahhhh){
+    this.ahhhh = 5;
+  }
+
+  method_func_clash(){print "method!";}
+}
+
+var instance = how_are_classes_handled(1);
+copy_reference_test(instance.ahhhh); // This is probably copied
+print instance.ahhhh;
+
+fun copy_reference_test_2(inst){
+  inst.ahhhh = inst.ahhhh -1;
+}
+
+copy_reference_test_2(instance); // this might be passed by reference
+print instance.ahhhh;
+// IT IS, AGH
+// be consistent
+// this is why I hate python it copies numbers but not lists
+// pick a default and let the user explicitly say when they don't want to use that default
+// like in C++ with x& to pass by reference but the default being to copy everything
+
+// What if I name a class method the same as a function?
+fun method_func_clash(){
+  print "function!";
+}
+
+method_func_clash();
+instance.method_func_clash();
+// Okay they don't clash, I think that's sensible
+
+// What happens if I declare a variable twice?
+var b = 2;
+var b = 3;
+print b;
+// This works
+// This is icky I don't think it should be allowed
