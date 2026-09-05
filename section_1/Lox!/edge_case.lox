@@ -151,3 +151,101 @@ var b = 3;
 print b;
 // This works
 // This is icky I don't think it should be allowed
+
+// Can you redefine functions??
+fun method_func_clash(){
+  print "hi";
+}
+method_func_clash();
+// Yes
+// Again I don't like this
+
+// Is there a recursion limit
+// fun ahh(){ahh();}
+// ahh();
+// yes
+
+// can I define variables with statements?
+// var x = print 5;
+// no
+
+// can I use keywords as variable names
+// var print = 5;
+// also no
+
+if (method_func_clash){print "hi";} // functions evaluate to true
+
+if (""){print "hi";} // empty strings evaluate to true?? really??
+
+// What if you put something that's not a method in a class
+class hii{
+  //print "hii";
+}
+// syntax error
+
+// In C you can't assign an array or struct to another array or struct.
+// Can you do it with class objects in lox?
+class assignment_test{}
+var ah = assignment_test();
+ah.help = 5;
+var AHHH = assignment_test();
+AHHH = ah;
+print AHHH.help;
+// This works, nice
+
+// Is AHHH a reference to ah or a copy?
+AHHH.help = 0;
+print ah.help;
+// It's a reference :/ changing AHHH.help messes with ah.help
+ah.help = 7;
+print AHHH.help; // Likewise changing ah.help messes with AHHH.help
+ah = 9; // Changing ah to be not a class doesn't change AHHHehelp
+print AHHH.help;
+
+// Okay, this could cause issues. 
+// What if I set a globally defined object equal to a locally defined one?
+fun class_fuckery(){
+  var oh_no = assignment_test(); // Local object
+  oh_no.help = "hey";
+  AHHH = oh_no; // AHHH is now a reference to a local object
+  oh_no.help = "stop!"; // Changing oh_no *after assigning AHHH* still changes AHHH
+}
+class_fuckery();
+// oh_no is now out of scope, AHHH is still a reference to it
+print AHHH.help;
+// AHHH just seems to have copied the data from oh_no, rather than being a reference?
+// Peculiar
+// It must be copied only when there's an edge case like this?
+
+// What about double reference? If make objects A, B and set B=A,
+// then changing B.help affects A.help and vice versa.
+// What if I make A, B, C, set B=A, C=A. Does changing C.help affect B.help?
+var A = assignment_test();
+A.help = "A: original help";
+var B = A;
+B.help = "B: new help";
+print A.help; // A.help is now changed
+var C = A;
+C.help = "C: new help";
+print A.help;
+print B.help; // It changes B as well!!
+var D=C;
+D.help = "D: newer help";
+print A.help;
+print B.help;
+print C.help;
+// Changes all 3 of them
+
+if (true){var c = 14;}
+//print c; // This gives a syntax error!
+
+if (true){var k;
+  var d = A;
+d.help = k;}
+print A.help;
+
+if (nil){print "nil!";} // Oh my god why does this work
+
+print -5/0;
+print 0/0; // why is this -nan? Why isn't it nan? What??
+print -0/0; // This is also -nan huh??

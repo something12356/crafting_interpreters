@@ -1,0 +1,28 @@
+Open questions:
+How should functions that are called before they're defined in the source code be handled?
+I think this should be valid but it's not in lox.
+
+Should objects be passed by copy or by reference? Should the user get control over which is chosen?
+(the default in lox is different between classes and datatypes, ew)
+I'd say by copy by default and by reference when the user explicitly wants it.
+I get why you'd make reference the default for classes though since it does make the program more efficient when users forget to pass by reference even though it would be more optimal.
+I find it interesting that in the default clox implementation, even though classes are passed by referenc,
+there's no issues when you try and reference an out of scope variable. There must be something smart going on that only copies when necessary?
+
+When expressions like "hi" appear in an if statement, what boolean should they evaluate to?
+I think most should evaluate to true but "", 0 and a couple others should evaluate to false. 
+Even nil evaluates to true in the default implementation :sob;
+
+Is:
+var a = 7;
+var a = 6;
+Valid syntax? I think it shouldn't be.
+
+Is:
+if (true){var a = 7;}
+print a;
+Valid? I think it should be.
+
+How should stuff like division by zero and overflow be handled?
+I think division by zero should give an error, lox just makes it +/- inf lol.
+Setting overflow / underflow to be +/- inf is sensible though, I don't mind that.

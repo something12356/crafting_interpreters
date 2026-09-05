@@ -7,3 +7,6 @@ Type conversion, being able to convert a float to a string etc would be nice.
 Any sort of I/O - keyboard, mouse, files.
 
 Exponentiation!!! Would be really nice! Annoying to implement by hand for non-integers.
+
+Way to pass variables by reference to function so you can change them in the function?
+Similarly, way to copy classes when passing them to function instead of referencing them
