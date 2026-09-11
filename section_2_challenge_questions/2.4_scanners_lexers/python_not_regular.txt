@@ -1,0 +1,3 @@
+Python has an "INDENT" and "DEDENT" token for handling indentation. 
+
+To generate an "INDENT" token we need to see that there were "x" spaces (or tabs or whatever) on the previous line and "x+1" spaces on the current line. This requires infinite states (one for each "x") so it can't be represented by a finite automaton and hence isn't regular.

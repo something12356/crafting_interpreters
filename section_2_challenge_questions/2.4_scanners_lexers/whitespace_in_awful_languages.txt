@@ -1,0 +1,16 @@
+In Ruby, spaces affect how functions interpret their arguments.
+
+If you call:
+"multiply(2,3)" it will multiple 2 and 3 to get 6
+"multiply 2,3" also works, using a space has the *same functionality as using parantheses*
+
+This has the unfortunate side effect of multiply (2,3) being valid syntax but meaning something unintuitive.
+The "parathenses" have already been applied because of the space, so this is like calling multiply((2,3)), you're giving the function a single argument of a tuple.
+
+CoffeeScript has the same functionality.
+
+The C preprocessor uses new lines to indicate new preprocessor directives, like in python, it just doesn't need semicolons. Much less cursed than CoffeeScript and Ruby.
+
+Might not want to discard comments for debugging and documentation purposes. E.g. python has docstrings, """comments like this""" which can be accessed at runtime using __doc__ to explain what a function does, etc.
+
+Might not discard whitespace for indentation, like in python! And newlines to indicate new statements, again, like in python.

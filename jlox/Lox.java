@@ -1,4 +1,4 @@
-package lox;
+package jlox;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,27 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
-
-enum TokenType {
-  // Single-character tokens.
-  LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE,
-  COMMA, DOT, MINUS, PLUS, SEMICOLON, SLASH, STAR,
-
-  // One or two character tokens.
-  BANG, BANG_EQUAL,
-  EQUAL, EQUAL_EQUAL,
-  GREATER, GREATER_EQUAL,
-  LESS, LESS_EQUAL,
-
-  // Literals.
-  IDENTIFIER, STRING, NUMBER,
-
-  // Keywords.
-  AND, CLASS, ELSE, FALSE, FUN, FOR, IF, NIL, OR,
-  PRINT, RETURN, SUPER, SELF, TRUE, VAR, WHILE,
-
-  EOF
-}
 
 public class Lox {
   static boolean hadError = false;
@@ -44,7 +23,7 @@ public class Lox {
   }
 
   private static void run(String source) {
-    Scanner lexer = new Scanner(source);
+    Lexer lexer = new Lexer(source);
     List<Token> tokens = lexer.lexTokens();
 
     // For now, just print the tokens.
